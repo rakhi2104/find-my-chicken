@@ -1,0 +1,26 @@
+{
+  "name": "find-my-chicken",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "client-install": "npm install --prefix client",
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
+  },
+  "author": "Rakesh Peela & Saketha Ramanujam",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^4.0.1",
+    "create-react-app": "^1.5.2",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "mongoose": "^5.2.12"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
+  }
+}
