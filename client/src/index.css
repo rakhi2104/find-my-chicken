@@ -3,3 +3,14 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+#ip-card {
+  position: static;
+  margin: 12px;
+  transform: translate(10,10);
+  z-index: -22;
+}
+
+MapComp {
+  height: 500px;
+}

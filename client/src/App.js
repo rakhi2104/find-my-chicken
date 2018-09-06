@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
-import Button from '@material-ui/core/Button'
-// import Card from '@material-ui/core/Card'
-// import { CardContent } from '@material-ui/core';
+import 'mapbox-gl/dist/mapbox-gl.css'
 
-import IPCard from './components/IPCard';
 import MapComp from './components/MapComp';
+import IPCard from './components/IPCard';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-          <h1>Welcome to React</h1>
-          <Button variant="contained" color="primary">Alert</Button>
-          <MapComp></MapComp>
+        <div id="ip-card" style={{zIndex: 10000, backgroundColor: "#fff"}}>
+          <IPCard/>
+        </div>
+        <MapComp style={{zIndex: -1111}}/>
       </div>
     );
   }

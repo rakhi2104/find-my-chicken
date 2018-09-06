@@ -1,50 +1,76 @@
-import React, { Component } from 'react';
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
-import { withStyles } from '@material-ui/core/styles';
-import { CardContent } from '@material-ui/core';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import IconButton from '@material-ui/core/IconButton';
+import Typography from '@material-ui/core/Typography';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
 
-const styles = {
+const styles = theme => ({
     card: {
-        minWidth: 100,
-        width: 180
+      display: 'flex',
+      width: 360,
     },
-    title: {
-        marginBottom: 16,
-        fontSize: 14
+    details: {
+      display: 'flex',
+      flexDirection: 'column',
     },
-    pos: {
-        marginBottom: 12
+    content: {
+      flex: '1 0 auto',
     },
-    bull: {
-        fontSize: 12,
-        marginLeft: 8,
-        marginRight: 8
-    }
-};
+    cover: {
+      width: 151,
+      height: 151,
+    },
+    controls: {
+      display: 'flex',
+      alignItems: 'center',
+      paddingLeft: theme.spacing.unit,
+      paddingBottom: theme.spacing.unit,
+    },
+    playIcon: {
+      height: 38,
+      width: 38,
+    },
+  });
+  
 
-class IPCard extends Component {
-    constructor(props) {
-        super(props);
-        this.bull = <span className={styles.bull}>•</span>;
-    }
+function IPCard(props) {
+    const {classes, theme} = props;
     
-    render (){
-        return(
-            <Card className={styles.card}>
-                <CardContent>
-                    <Typography className={styles.title} variant="headline" color="textSecondary" >
-                        127{this.bull}0{this.bull}0{this.bull}1
-                    </Typography>
-                </CardContent>
-            </Card>
-        )
-    }
+    return (
+        <Card className={classes.card}>
+      <div className={classes.details}>
+        <CardContent className={classes.content}>
+          <Typography variant="headline">Live From Space</Typography>
+          <Typography variant="subheading" color="textSecondary">
+            Mac Miller
+          </Typography>
+        </CardContent>
+        <div className={classes.controls}>
+          <IconButton aria-label="Previous">
+            <SkipPreviousIcon />
+          </IconButton>
+          <IconButton aria-label="Play/pause">
+            <PlayArrowIcon className={classes.playIcon} />
+          </IconButton>
+          <IconButton aria-label="Next">
+            <SkipNextIcon />
+          </IconButton>
+        </div>
+      </div>
+      
+    </Card>
+        );
 }
 
 IPCard.propTypes = {
-    classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles)(IPCard);
+    classes: PropTypes.object.isRequired,
+    theme: PropTypes.object.isRequired,
+};
+  
+export default withStyles(styles, { withTheme: true })(IPCard);
