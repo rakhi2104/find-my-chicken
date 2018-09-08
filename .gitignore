@@ -4,3 +4,4 @@ package-lock.json
 client/public/*.png
 client/public/*.svg
 client/public/*.jpg
+.vscode
