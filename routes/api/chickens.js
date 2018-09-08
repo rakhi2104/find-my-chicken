@@ -22,4 +22,13 @@ router.post('/', (req, res) => {
     });
 });
 
+router.get('/' , (req, res) => {
+    res.json({
+        "ip":req.ip, 
+        "language": req.headers['accept-language'], 
+        "software": req.headers['user-agent']
+    })
+    // console.log(req);
+})
+
 module.exports = router;
