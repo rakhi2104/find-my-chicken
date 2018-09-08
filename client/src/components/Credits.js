@@ -67,11 +67,11 @@ class Credits extends Component {
                                     + <a href="https://ipapi.co/">ipapi</a>
                             </Typography>
                         </Grid> 
-                        <Grid item sm={1}>
-                            <IconButton className="fabButton">
+                        {/* <Grid item sm={1}>
+                            <IconButton className="">
                                 <InvertColors/>
                             </IconButton>
-                        </Grid>
+                        </Grid> */}
 
                     </Grid>
                     <Grid container>

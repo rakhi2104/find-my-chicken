@@ -7,7 +7,8 @@ import Credits from './Credits';
 
 import axios from 'axios';
 import Loading from './Loading';
-import { Card, Typography } from '@material-ui/core';
+import { Card, Typography, Button } from '@material-ui/core';
+import InvertColors from '@material-ui/icons/InvertColors';
 
 // const styles = theme => ({
 //     button: {
@@ -29,7 +30,7 @@ export default class MainLayout extends Component {
             },
             loading: true,
             location: null,
-            mapTheme: 0,
+            mapTheme: false,
             error: null,
             pos: null
         }
@@ -38,6 +39,7 @@ export default class MainLayout extends Component {
 
         this.getIP = this.getIP.bind(this);
         this.getLocation = this.getLocation.bind(this);
+        // this.changeMapTheme = this.changeMapTheme.bind(this);
     }
 
     getIP = () => {
@@ -71,8 +73,13 @@ export default class MainLayout extends Component {
                 loading: false
             })
         })
-
         // this.pos = [this.state.location.latitude, this.state.location.longitude];
+    }
+
+    changeMapTheme() {
+        this.setState({
+            mapTheme : !this.state.mapTheme
+        })
     }
 
     componentDidMount() {
@@ -92,24 +99,18 @@ export default class MainLayout extends Component {
                 <div>
                     <Grid container className="root">
                         <Grid item sm={1} className="darker" >
-                            {/* <Grid container>
-                                <Grid item sm={6}>
-                                    <Card>
-                                        <img width="120" height="120" src="chicken.jpg"/>
-                                    </Card>
-                                    <Typography>
-                                        Find My Chicken
-                                    </Typography>
-                                </Grid>
-                                <Grid item sm={6}>
-                                </Grid>
-                            </Grid> */}
                             <IPCard cardData={this.state.cardData}></IPCard>
                             <RecipeCard location={this.state.location} cardData={this.state.cardData}></RecipeCard>
+                            <Button variant="fab" color="secondary" className="fabButton" onClick={() => this.changeMapTheme()}>
+                                <InvertColors/>
+                            </Button>
+                            <br/>
+                            <br/>
+                            <br/>
                             <Credits></Credits>
                         </Grid> 
                         <Grid item sm={11} className="deep-back">
-                            <MapComp location={this.state.pos} mapTheme="0"/>
+                            <MapComp location={this.state.pos} mapTheme={this.state.mapTheme}/>
                         </Grid>
                     </Grid>
                 </div>

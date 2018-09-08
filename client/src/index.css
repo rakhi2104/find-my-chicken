@@ -34,7 +34,8 @@ body {
 
 .fabButton {
   float: right;
-  position: absolute;
+  /* position: absolute; */
+  margin-right: -28px !important;
 }
 
 .pad-top {

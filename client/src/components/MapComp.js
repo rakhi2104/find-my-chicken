@@ -13,7 +13,7 @@ export default class MapComp extends Component {
             zoom: 12,
             width: '100%',
             height: '100%',
-            themeStyle: 0
+            themeStyle: this.props.mapTheme
         }
 
     }
