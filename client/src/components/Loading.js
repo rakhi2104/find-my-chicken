@@ -1,24 +1,17 @@
-import React, {Component} from 'react';
-import Card from '@material-ui/core/Card';
-import { CardContent, Typography, LinearProgress } from '@material-ui/core';
+import { CardContent, LinearProgress, Typography } from "@material-ui/core";
+import Card from "@material-ui/core/Card";
+import React, { Component } from "react";
 
 export default class Loading extends Component {
-    constructor(props) {
-        super(props);
-    }
 
-    render() {
-
-        return (
-            <Card>
-                <CardContent>
-                    <Typography component="h2">
-                        Please Wait ...
-                    </Typography>
-                    <LinearProgress></LinearProgress>
-                </CardContent>
-            </Card>
-        )
-
-    }
+  render() {
+    return (
+      <Card>
+        <CardContent>
+          <Typography component="h2">Please Wait ...</Typography>
+          <LinearProgress />
+        </CardContent>
+      </Card>
+    );
+  }
 }

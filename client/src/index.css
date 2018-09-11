@@ -12,20 +12,24 @@ body {
 
 .bullet {
   display: inline-block;
-  margin: 0 1px;
+  margin: 0 8px;
   transform: scale(0.8);
 }
 
 .darker {
   background: #0b56be;
-  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .abs-out {
-  margin: 48px;
+  margin: 24px 48px;
   min-width: 480px;
-  margin-right: -48px; 
+  margin-right: -48px;
   z-index: 100;
+}
+
+.top-margin {
+  margin-top: 48px;
 }
 
 .deep-back {
@@ -35,6 +39,7 @@ body {
 .fabButton {
   float: right;
   /* position: absolute; */
+  margin-top: 36px !important;
   margin-right: -28px !important;
 }
 
@@ -46,6 +51,6 @@ body {
   margin-top: 12px !important;
 }
 
-.no-underline > a{
+.no-underline > a {
   text-decoration: none;
 }
