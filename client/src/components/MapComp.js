@@ -1,57 +1,44 @@
 import "mapbox-gl/dist/mapbox-gl.css";
 import MapboxGl from "mapbox-gl/dist/mapbox-gl.js";
 import React, { Component } from "react";
+import PropTypes from 'prop-types';
 
 const TOKEN =
   "pk.eyJ1IjoicmFraGkyMTA0IiwiYSI6ImNqbG04aHNrcDEyNG4za2wxc3NsYnhzaGQifQ.bdS6WhHrWfDE11LrybUoNw";
+MapboxGl.accessToken = TOKEN;
 
 export default class MapComp extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      lat: 17.740426,
-      lng: 83.217264,
-      zoom: 12,
-      width: "100%",
-      height: "100%",
-      themeStyle: this.props.mapTheme
-    };
+    this.map = undefined;
+    this.container = undefined;
+    this.tooltip = undefined;
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.mapTheme !== this.state.themeStyle) {
-      this.setState({
-        themeStyle: this.props.mapTheme
-      });
+  componentDidUpdate(oldProps) {
+    if (oldProps.mapTheme !== this.props.themeStyle) {
+      this.map.setStyle(
+        "mapbox://styles/mapbox/" + this.props.themeStyle + "-v9"
+      );
     }
   }
 
   componentDidMount() {
-    const { lat, lng } = this.props.location;
-    const { zoom } = this.state;
-    MapboxGl.accessToken = TOKEN;
+    const { location: { lat, lng }, zoom } = this.props;
 
-    const map = new MapboxGl.Map({
+    this.map = new MapboxGl.Map({
       container: this.container,
-      // style:
-      //   "mapbox://styles/mapbox/" +
-      //   (this.props.themeStyle ? "dark" : "light") +
-      //   "-v9",
       center: [lng, lat],
       // interactive: false,
+      style: "mapbox://styles/mapbox/" + this.props.themeStyle + "-v9",
       zoom
     });
-    map.setStyle(
-      "mapbox://styles/mapbox/" +
-        (this.props.themeStyle ? "dark" : "light") +
-        "-v9"
-    );
 
-    const tooltip = new MapboxGl.Marker(this.tooltipContainer, {
+    this.tooltip = new MapboxGl.Marker(this.tooltipContainer, {
       offset: [0, 0]
     })
       .setLngLat([0, 0])
-      .addTo(map);
+      .addTo(this.map);
 
     // map.on('mousemove', (e) => {
     //   const features = map.queryRenderedFeatures(e.point);
@@ -61,13 +48,11 @@ export default class MapComp extends Component {
     // });
 
     // const marker = new MapboxGl.Marker({
-    //     setLngLat: [this.state.lat, this.state.lng]
+    //     setLngLat: [lat, lng]
     // }).addTo(map)
   }
 
   render() {
-    // const {lat, lng, zoom} = this.state;
-    console.log(this.props.location);
     return (
       <div className="deep-back">
         <div
@@ -78,3 +63,12 @@ export default class MapComp extends Component {
     );
   }
 }
+
+MapComp.proptypes = {
+  location: PropTypes.shape({
+    lat: PropTypes.string.isRequired,
+    lng: PropTypes.string.isRequired,
+  }).isRequired,
+  zoom: PropTypes.number.isRequired,
+  themeStyle: PropTypes.string.isRequired,
+};
