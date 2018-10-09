@@ -8,10 +8,10 @@ A React Web Application that tracks user's location using IP address from the so
 
 ## How to install
 
-Clone the repository.
-Run `npm install` in the base directory
-Run `npm install` in the client directory also
-Run `npm run dev` in the base directory
+* Clone the repository.
+* Run `npm install` in the base directory
+* Run `npm install` in the client directory also
+* Run `npm run dev` in the base directory
 
 ### Demo
 ![Working Demo](https://res.cloudinary.com/crack-jack/image/upload/v1539098617/demo_lrs2ct.gif)
