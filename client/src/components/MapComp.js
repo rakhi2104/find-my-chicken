@@ -19,10 +19,10 @@ export default class MapComp extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.mapTheme !== this.state.themeStyle ) {
+    if (nextProps.mapTheme !== this.state.themeStyle) {
       this.setState({
         themeStyle: this.props.mapTheme
-      })
+      });
     }
   }
 
@@ -41,13 +41,17 @@ export default class MapComp extends Component {
       // interactive: false,
       zoom
     });
-    map.setStyle("mapbox://styles/mapbox/" +
-    (this.props.themeStyle ? "dark" : "light") +
-    "-v9");
+    map.setStyle(
+      "mapbox://styles/mapbox/" +
+        (this.props.themeStyle ? "dark" : "light") +
+        "-v9"
+    );
 
     const tooltip = new MapboxGl.Marker(this.tooltipContainer, {
       offset: [0, 0]
-    }).setLngLat([0,0]).addTo(map);
+    })
+      .setLngLat([0, 0])
+      .addTo(map);
 
     // map.on('mousemove', (e) => {
     //   const features = map.queryRenderedFeatures(e.point);
@@ -55,7 +59,7 @@ export default class MapComp extends Component {
     //   map.getCanvas().style.cursor = features.length ? 'pointer' : '';
     //   // this.setTooltip(features);
     // });
-    
+
     // const marker = new MapboxGl.Marker({
     //     setLngLat: [this.state.lat, this.state.lng]
     // }).addTo(map)

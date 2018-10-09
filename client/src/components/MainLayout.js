@@ -9,15 +9,6 @@ import Loading from "./Loading";
 import MapComp from "./MapComp";
 import RecipeCard from "./RecipeCard";
 
-// const styles = theme => ({
-//     button: {
-//       margin: theme.spacing.unit,
-//     },
-//     extendedIcon: {
-//       marginRight: theme.spacing.unit,
-//     },
-//   });
-
 export default class MainLayout extends Component {
   constructor(props) {
     super(props);
@@ -105,7 +96,7 @@ export default class MainLayout extends Component {
                 location={this.state.location}
                 cardData={this.state.cardData}
               />
-              <Credits/>
+              <Credits />
               <Button
                 variant="fab"
                 color="secondary"
