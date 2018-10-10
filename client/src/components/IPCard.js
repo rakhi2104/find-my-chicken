@@ -39,8 +39,8 @@ class IPCard extends Component {
 
   render() {
     const { classes } = this.props;
-    // const ip = this.props.cardData.ip.split('.');
-    const ip = "8.8.8.8".split(".");
+    const ip = this.props.cardData.ip.split('.');
+    // const ip = "8.8.8.8".split(".");
     // console.log(bull);
     return (
       <Card className="abs-out top-margin">
