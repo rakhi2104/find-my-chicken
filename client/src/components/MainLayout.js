@@ -23,7 +23,14 @@ export default class MainLayout extends Component {
       location: null,
       mapTheme: false,
       error: null,
-      pos: null
+      pos: {
+        lat: 17.740426,
+        lng: 83.217264,
+      },
+      zoom: 12,
+      width: "100%",
+      height: "100%",
+      themeStyle: 'light',
     };
 
     this.getIP = this.getIP.bind(this);
@@ -69,10 +76,8 @@ export default class MainLayout extends Component {
 
   changeMapTheme() {
     this.setState({
-      mapTheme: !this.state.mapTheme
+      themeStyle: this.state.themeStyle === 'light' ? 'dark' : 'light',
     });
-
-    console.log(this.state.mapTheme);
   }
 
   componentDidMount() {
@@ -80,7 +85,7 @@ export default class MainLayout extends Component {
   }
 
   render() {
-    const { loading } = this.state;
+    const { loading, pos, zoom, cardData, location, themeStyle } = this.state;
     if (loading) {
       return <Loading />;
     }
@@ -90,11 +95,11 @@ export default class MainLayout extends Component {
         <div>
           <Grid container className="root">
             <Grid item sm={1} className="darker">
-              <IPCard cardData={this.state.cardData} />
+              <IPCard cardData={cardData} />
               <RecipeCard
                 className="small-margins"
-                location={this.state.location}
-                cardData={this.state.cardData}
+                location={location}
+                cardData={cardData}
               />
               <Credits />
               <Button
@@ -108,8 +113,9 @@ export default class MainLayout extends Component {
             </Grid>
             <Grid item sm={11} className="deep-back">
               <MapComp
-                location={this.state.pos}
-                mapTheme={this.state.mapTheme}
+                location={pos}
+                themeStyle={themeStyle}
+                zoom={zoom}
               />
             </Grid>
           </Grid>
