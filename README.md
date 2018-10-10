@@ -19,5 +19,5 @@ A React Web Application that tracks user's location using IP address from the so
 *Note*: For time being, the App only tracks 8.8.8.8
 
 ### TODO
-- Switch between dark and light themes in Mapbox reactively.
+- ~Switch between dark and light themes in Mapbox reactively.~ [#5](https://github.com/rakhi2104/find-my-chicken/pull/5)
 - Dynamically locate user using IP from `req`
