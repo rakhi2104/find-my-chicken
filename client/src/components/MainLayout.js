@@ -40,7 +40,6 @@ export default class MainLayout extends Component {
 
   getIP = () => {
     axios.get("http://localhost:5000/api/").then(({ data }) => {
-      
       this.setState({
         loading: false,
         error: false,

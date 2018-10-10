@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Help from "@material-ui/icons/Help";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, cloneElement } from "react";
 
 const styles = theme => ({
   card: {
@@ -53,9 +53,10 @@ class IPCard extends Component {
           </Typography>
           <Grid container>
             <Grid item sm={11}>
-              <Typography variant="headline" component="h2">
-                {ip.reduce((res, item) => {
-                  return [...res, bull, item];
+              <Typography variant="h5" component="h2">
+                {ip.reduce((res, item, key) => {
+                  let _bull = cloneElement(bull, { key })
+                  return [...res, _bull, item];
                 })}
               </Typography>
             </Grid>
