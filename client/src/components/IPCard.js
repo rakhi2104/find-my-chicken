@@ -39,9 +39,9 @@ class IPCard extends Component {
 
   render() {
     const { classes } = this.props;
-    // const ip = this.props.cardData.ip.split('.');
-    const ip = "8.8.8.8".split(".");
-    // console.log(bull);
+    const { ip } = this.props.cardData;
+    const _ip = ip.split(".");
+
     return (
       <Card className="abs-out top-margin">
         <CardContent>
@@ -54,7 +54,7 @@ class IPCard extends Component {
           <Grid container>
             <Grid item sm={11}>
               <Typography variant="h5" component="h2">
-                {ip.reduce((res, item, key) => {
+                {_ip.reduce((res, item, key) => {
                   let _bull = cloneElement(bull, { key })
                   return [...res, _bull, item];
                 })}

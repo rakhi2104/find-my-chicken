@@ -8,16 +8,17 @@ import IPCard from "./IPCard";
 import Loading from "./Loading";
 import MapComp from "./MapComp";
 import RecipeCard from "./RecipeCard";
+import publicIp from 'public-ip'
+import { detect } from 'detect-browser'
 
 export default class MainLayout extends Component {
   constructor(props) {
     super(props);
+    this.browser = detect()
     this.state = {
       cardData: {
-        ip: "127.0.0.1",
-        language: "en-GB,en-US;q=0.9,en;q=0.8",
-        software:
-          "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.81 Safari/537.36"
+        ip: null,
+        
       },
       loading: true,
       location: null,
@@ -33,21 +34,9 @@ export default class MainLayout extends Component {
       themeStyle: 'light',
     };
 
-    this.getIP = this.getIP.bind(this);
     this.getLocation = this.getLocation.bind(this);
     this.changeMapTheme = this.changeMapTheme.bind(this);
   }
-
-  getIP = () => {
-    axios.get("http://localhost:5000/api/").then(x => {
-      this.setState({
-        cardData: x
-      });
-      this.getLocation(x.ip);
-    });
-
-    this.getLocation("8.8.8.8");
-  };
 
   getLocation(ipAddr) {
     axios
@@ -81,7 +70,22 @@ export default class MainLayout extends Component {
   }
 
   componentDidMount() {
-    this.getIP();
+    publicIp.v4()
+    .then(ip => {
+      this.getLocation(ip)
+      this.setState({
+        cardData: {
+          ip,
+          language: "en-GB,en-US;q=0.9,en;q=0.8",
+          software: {
+            name: this.browser.name,
+            os: this.browser.os,
+            version: this.browser.version
+          }
+        }
+      })
+    })
+
   }
 
   render() {

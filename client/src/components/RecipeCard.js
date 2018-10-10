@@ -70,7 +70,11 @@ class ControlledExpansionPanels extends React.Component {
             <Typography className={classes.heading}>Browser Details</Typography>
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
-            <Typography>{software}</Typography>
+            <Typography>
+              Browser: {software.name}<br />
+              Browser Version: {software.version}<br />
+              OS: {software.os}<br />
+            </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>
       </div>
