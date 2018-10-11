@@ -39,25 +39,30 @@ export default class MainLayout extends Component {
   }
 
   getIP = () => {
-    axios.get("http://localhost:5000/api/").then(x => {
+    axios.get("http://localhost:5000/api/").then(({ data }) => {
+      
       this.setState({
-        cardData: x
+        loading: false,
+        error: false,
+        cardData: data,
+        location: data,
+        pos: {
+          lat: data.latitude,
+          lng: data.longitude
+        }
       });
-      this.getLocation(x.ip);
     });
 
-    this.getLocation("8.8.8.8");
   };
 
   getLocation(ipAddr) {
     axios
       .get(`https://ipapi.co/${ipAddr}/json/`)
       .then(resp => {
-        // console.log(resp.data);
         this.setState({
-          location: resp.data,
           loading: false,
           error: false,
+          location: resp.data,
           pos: {
             lat: resp.data.latitude,
             lng: resp.data.longitude
