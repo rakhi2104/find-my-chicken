@@ -5,7 +5,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Help from "@material-ui/icons/Help";
 import PropTypes from "prop-types";
-import React, { Component } from "react";
+import React, { Component, cloneElement } from "react";
 
 const styles = theme => ({
   card: {
@@ -39,8 +39,8 @@ class IPCard extends Component {
 
   render() {
     const { classes } = this.props;
-    // const ip = this.props.cardData.ip.split('.');
-    const ip = "8.8.8.8".split(".");
+    const ip = this.props.cardData.ip.split('.');
+    // const ip = "8.8.8.8".split(".");
     // console.log(bull);
     return (
       <Card className="abs-out top-margin">
@@ -53,9 +53,10 @@ class IPCard extends Component {
           </Typography>
           <Grid container>
             <Grid item sm={11}>
-              <Typography variant="headline" component="h2">
-                {ip.reduce((res, item) => {
-                  return [...res, bull, item];
+              <Typography variant="h5" component="h2">
+                {ip.reduce((res, item, key) => {
+                  let _bull = cloneElement(bull, { key })
+                  return [...res, _bull, item];
                 })}
               </Typography>
             </Grid>

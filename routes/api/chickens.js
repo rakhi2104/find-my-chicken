@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const axios = require('axios');
 
 // chicken module
 const Chicken = require('../../models/ip');
@@ -22,13 +23,14 @@ router.post('/', (req, res) => {
     });
 });
 
-router.get('/' , (req, res) => {
+router.get('/' , async (req, res) => {
+    const { data } = await axios.get(`https://ipapi.co/json`);
+    
     res.json({
-        "ip":req.ip, 
+        ...data,
         "language": req.headers['accept-language'], 
         "software": req.headers['user-agent']
     })
-    // console.log(req);
 })
 
 module.exports = router;

@@ -9,8 +9,8 @@ require('dotenv').config();
 const app = express();
 
 app.use(bodyParser.json());
-app.use('/api', chickens);
 app.use(cors());
+app.use('/api', chickens);
 // Database Config
 const db = process.env.MLAB_URI;
 const port = process.env.PORT || 5000;
