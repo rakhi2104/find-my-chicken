@@ -1,10 +1,7 @@
 version: '3.7'
 services: 
-  client:
+  find-my-chicken:
     build: .
     ports:
       - 3000:3000
-  server:
-    build: .
-    ports: 
       - 5000:5000
