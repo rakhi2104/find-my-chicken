@@ -7,6 +7,14 @@ const Chicken = require('../../models/ip');
 // @route POST api/chicken
 // @desc New Chicken hit
 // @access Public
+
+
+router.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 router.post('/', (req, res) => {
     const newChicken = new Chicken({
         ip: "127.0.0.1",
@@ -22,11 +30,11 @@ router.post('/', (req, res) => {
     });
 });
 
-router.get('/' , (req, res) => {
+router.get('/', (req, res) => {
     res.json({
-        "ip":req.ip, 
-        "language": req.headers['accept-language'], 
-        "software": req.headers['user-agent']
+        "ip": req.ip,
+        "language": req.headers['accept-language'],
+        "software": req.headers['user-agent'],
     })
     // console.log(req);
 })
