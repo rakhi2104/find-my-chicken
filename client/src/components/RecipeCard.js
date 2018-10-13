@@ -38,6 +38,7 @@ class ControlledExpansionPanels extends React.Component {
     const { expanded } = this.state;
     const { software } = this.props.cardData;
     const { location } = this.props;
+    const { ipTime } = this.props;
 
     return (
       <div className="abs-out">
@@ -57,8 +58,9 @@ class ControlledExpansionPanels extends React.Component {
               Organization: {location.org} <br />
               City: {location.city} <br />
               Region: {location.region} <br />
-              Country: {location.country} <br/>
-              Timezone: {location.timezone}
+              Country: {location.country} <br />
+              Timezone: {location.timezone} <br />
+              Response Time: {ipTime}
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanel>

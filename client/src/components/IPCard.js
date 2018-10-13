@@ -27,6 +27,12 @@ const styles = theme => ({
   }
 });
 
+const componentStyles = {
+  responseTime: {
+    fontSize: 12,
+    marginTop: 10
+  }
+};
 const bull = <span className="bullet">•</span>;
 
 class IPCard extends Component {
@@ -38,7 +44,7 @@ class IPCard extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, respTime } = this.props;
     // const ip = this.props.cardData.ip.split('.');
     const ip = "8.8.8.8".split(".");
     // console.log(bull);
@@ -58,6 +64,9 @@ class IPCard extends Component {
                   return [...res, bull, item];
                 })}
               </Typography>
+              <div style={componentStyles.responseTime}>
+                Response Time: {respTime}
+              </div>
             </Grid>
             <Grid item sm={1}>
               <Tooltip

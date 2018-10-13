@@ -2,12 +2,15 @@ import { Button } from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import InvertColors from "@material-ui/icons/InvertColors";
 import axios from "axios";
+import axiosTiming from "axios-timing";
 import React, { Component } from "react";
 import Credits from "./Credits";
 import IPCard from "./IPCard";
 import Loading from "./Loading";
 import MapComp from "./MapComp";
 import RecipeCard from "./RecipeCard";
+let ipRes = axios.create();
+let locationRes = axios.create();
 
 export default class MainLayout extends Component {
   constructor(props) {
@@ -25,12 +28,14 @@ export default class MainLayout extends Component {
       error: null,
       pos: {
         lat: 17.740426,
-        lng: 83.217264,
+        lng: 83.217264
       },
       zoom: 12,
       width: "100%",
       height: "100%",
-      themeStyle: 'light',
+      themeStyle: "light",
+      locationRespTime: "",
+      ipRespTime: ""
     };
 
     this.getIP = this.getIP.bind(this);
@@ -39,21 +44,21 @@ export default class MainLayout extends Component {
   }
 
   getIP = () => {
-    axios.get("http://localhost:5000/api/").then(x => {
+    ipRes.get("http://localhost:5000/api/").then(x => {
       this.setState({
-        cardData: x
+        cardData: x.data
       });
-      this.getLocation(x.ip);
+      // console.log(x);
+      // this.getLocation(x.ip);
     });
 
     this.getLocation("8.8.8.8");
   };
 
   getLocation(ipAddr) {
-    axios
+    locationRes
       .get(`https://ipapi.co/${ipAddr}/json/`)
       .then(resp => {
-        // console.log(resp.data);
         this.setState({
           location: resp.data,
           loading: false,
@@ -76,16 +81,33 @@ export default class MainLayout extends Component {
 
   changeMapTheme() {
     this.setState({
-      themeStyle: this.state.themeStyle === 'light' ? 'dark' : 'light',
+      themeStyle: this.state.themeStyle === "light" ? "dark" : "light"
     });
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    await axiosTiming(ipRes, timeInMs => {
+      this.setState({ ipRespTime: `${timeInMs.toFixed()}ms` });
+    });
+
+    await axiosTiming(locationRes, timeInMs => {
+      this.setState({ locationRespTime: `${timeInMs.toFixed()}ms` });
+    });
+
     this.getIP();
   }
 
   render() {
-    const { loading, pos, zoom, cardData, location, themeStyle } = this.state;
+    const {
+      loading,
+      pos,
+      zoom,
+      cardData,
+      location,
+      themeStyle,
+      ipRespTime,
+      locationRespTime
+    } = this.state;
     if (loading) {
       return <Loading />;
     }
@@ -95,11 +117,12 @@ export default class MainLayout extends Component {
         <div>
           <Grid container className="root">
             <Grid item sm={1} className="darker">
-              <IPCard cardData={cardData} />
+              <IPCard respTime={locationRespTime} cardData={cardData} />
               <RecipeCard
                 className="small-margins"
                 location={location}
                 cardData={cardData}
+                ipTime={ipRespTime}
               />
               <Credits />
               <Button
@@ -112,11 +135,7 @@ export default class MainLayout extends Component {
               </Button>
             </Grid>
             <Grid item sm={11} className="deep-back">
-              <MapComp
-                location={pos}
-                themeStyle={themeStyle}
-                zoom={zoom}
-              />
+              <MapComp location={pos} themeStyle={themeStyle} zoom={zoom} />
             </Grid>
           </Grid>
         </div>
