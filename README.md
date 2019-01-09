@@ -13,6 +13,12 @@ A React Web Application that tracks user's location using IP address from the so
 * Run `npm install` in the client directory also
 * Run `npm run dev` in the base directory
 
+## Run in Docker
+
+```
+docker-compose up
+```
+
 ### Demo
 ![Working Demo](https://res.cloudinary.com/crack-jack/image/upload/v1539098617/demo_lrs2ct.gif)
 
